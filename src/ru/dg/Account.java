@@ -8,10 +8,12 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Account {
     private int balance;
     private ReentrantLock lock;
+    private int failCount;
 
     public Account (int initialBalance) {
         this.balance = initialBalance;
         this.lock =  new ReentrantLock();
+        failCount = 0;
     }
 
     public void withdraw(int amount) {
@@ -28,5 +30,9 @@ public class Account {
 
     public ReentrantLock getLock() {
         return lock;
+    }
+
+    public void incFailCount() {
+        failCount++;
     }
 }

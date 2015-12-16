@@ -1,7 +1,9 @@
 package ru.dg;
 
-import javax.naming.InsufficientResourcesException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import javax.naming.InsufficientResourcesException;
 
 /**
  * Created by К on 05.12.2015.
@@ -9,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class Operations {
     final static long WAIT_SEC = 3;
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         final Account a = new Account(3000);
         final Account b = new Account(5000);
 
@@ -31,6 +33,18 @@ public class Operations {
         } catch (InsufficientResourcesException e) {
             System.out.println("Transfer is cancelled due to insufficient balance on account");
         }
+    } */
+
+    public static void main(String[] args) {
+        ExecutorService service = Executors.newFixedThreadPool(3);
+        Account acc1 = new Account(1500);
+        Account acc2 =  new Account(200);
+
+//        for (int i=0; i<10; i++) {
+//            service.submit(
+//              new Transfer(acc1, acc2);
+//            );
+//        }
     }
 
     static void transfer(Account acc1, Account acc2, int amount) throws InsufficientResourcesException {
