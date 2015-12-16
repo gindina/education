@@ -1,8 +1,9 @@
 package ru.dg;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.*;
 import javax.naming.InsufficientResourcesException;
 
 /**
@@ -36,15 +37,26 @@ public class Operations {
     } */
 
     public static void main(String[] args) {
+        Random rnd = new Random();
         ExecutorService service = Executors.newFixedThreadPool(3);
-        Account acc1 = new Account(1500);
+        final Account acc1 = new Account(1500);
         Account acc2 =  new Account(200);
 
-//        for (int i=0; i<10; i++) {
-//            service.submit(
-//              new Transfer(acc1, acc2);
-//            );
-//        }
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Schedule: "+String.valueOf(acc1.getFailCount()));
+            }
+        }, 3, 1, TimeUnit.SECONDS);
+
+        List<Future<Boolean>> futureList = new ArrayList<>(10);
+        for (int i=0; i<10; i++) {
+            futureList.add(service.submit(
+                    new Transfer(acc1, acc2, rnd.nextInt(350), i)
+            ));
+        }
+
     }
 
     static void transfer(Account acc1, Account acc2, int amount) throws InsufficientResourcesException {

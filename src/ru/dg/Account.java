@@ -3,7 +3,7 @@ package ru.dg;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Created by Ê on 05.12.2015.
+ * Created by ï¿½ on 05.12.2015.
  */
 public class Account {
     private int balance;
@@ -34,5 +34,13 @@ public class Account {
 
     public void incFailCount() {
         failCount++;
+    }
+
+    public int getFailCount() {
+        return failCount;
+    }
+
+    public void setFailCount(int failCount) {
+        this.failCount = failCount;
     }
 }

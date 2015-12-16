@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import javax.naming.InsufficientResourcesException;
 
 /**
- * Created by Ê on 12.12.2015.
+ * Created by ï¿½ on 12.12.2015.
  */
 public class Transfer implements Callable<Boolean> {
   private Account acc1;
@@ -35,7 +35,7 @@ public class Transfer implements Callable<Boolean> {
             acc1.withdraw(amount);
             printTransferMessage("sucessfully withdraw amount from acc1");
             acc2.deposit(amount);
-            printTransferMessage("sucessfully deposit amount to acc2");
+            printTransferMessage("~~~~~~sucessfully deposit amount to acc2~~~~");
             Thread.sleep(5000);
             return true;
           }
